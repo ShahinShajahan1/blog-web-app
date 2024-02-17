@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/styles/main.css">
+  </head>
+  <body>
+    <div class="container maincontainer">
+      <h1 class="mb-4 brand-title">Your Blog Posts</h1>
+      <a href="/blogs/new" class="btn-success button newblog">New Blog</a>
+      <% blogs.forEach(blog => { %>
+        <div class=" mt-4 cardcontainer">
+          <div class="card-body">
+            <h4 class="card-title"><%= blog.title %></h4>
+            <div class="card-text mb-2"><%= blog.description %></div>
+            <div class="card-subtitle text-muted mb-2">
+                <%= blog.createdDate.toLocaleDateString() %>
+              </div>
+            <a href="/blogs/<%= blog.slug %>" class="btn btn-primary button readmore">Read More</a>
+            <a href="/blogs/edit/<%= blog.id %>" class="btn btn-info button edit">Edit</a>
+              <form action="/blogs/<%= blog.id %>?_method=DELETE" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-danger button delete">Delete</button>    
+              </form>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
